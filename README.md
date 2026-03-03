@@ -1,20 +1,121 @@
-# NLP-Sentiment-Analysis
+# NLP Sentiment Analysis
 
-A hybrid deep learning project for multi-class emotion classification on short texts (tweets).
+A hybrid deep learning project for multi-class sentiment and emotion classification on short text data (tweets).
 
-This repository implements a **TextCNN + Lexicon-Based Sentiment Model** that combines:
+## Overview
 
--  Deep learning (TextCNN) for contextual understanding  
--  SentiWordNet-based features for polarity scoring  
+This project implements a hybrid architecture that combines:
 
-The goal is to improve sentiment classification performance by leveraging both neural networks and traditional NLP techniques.
+- TextCNN for contextual feature extraction  
+- SentiWordNet-based lexical sentiment features  
+
+The objective is to improve classification performance by leveraging both deep semantic learning and traditional sentiment scoring techniques.
+
+The model performs multi-class classification (6 emotion categories).
 
 ---
 
-## Project Overview
+## Architecture
 
-Short texts like tweets are noisy and informal.  
-Pure deep learning models may miss explicit sentiment polarity.  
-Pure lexicon-based models lack contextual understanding.
+The system consists of two parallel branches:
 
-This project merges both approaches into a single hybrid architecture:
+1. TextCNN Branch
+   - Embedding layer (20,000 vocabulary size, 150 dimensions)
+   - 1D Convolutions with kernel sizes 3, 4, 5
+   - Global Max Pooling
+   - Feature concatenation
+
+2. Lexicon Feature Branch
+   - Sentiment features extracted using:
+     - Tokenization
+     - POS tagging
+     - WordNet mapping
+     - SentiWordNet scoring
+   - Aggregated positive, negative, and objective scores
+   - Dense processing layer
+
+Both branches are concatenated and passed through fully connected layers with a Softmax output (6 classes).
+
+---
+
+## Text Preprocessing
+
+- Lowercasing
+- Emoji conversion to text
+- URL removal
+- Mention removal
+- Hashtag cleaning
+- Whitespace normalization
+
+---
+
+## Loss Function
+
+Focal Loss is used to address potential class imbalance:
+
+focal_loss(gamma=2.0, alpha=0.25)
+
+---
+
+## Training Configuration
+
+- Epochs: 12
+- Batch size: 32
+- Validation split: 10%
+- Early stopping
+- Learning rate reduction on plateau
+
+---
+
+## Tech Stack
+
+- Python
+- TensorFlow / Keras
+- NLTK
+- SentiWordNet
+- Scikit-learn
+- NumPy
+- Pandas
+
+---
+
+## Installation
+
+Install dependencies:
+
+pip install nltk numpy pandas scikit-learn tensorflow emoji
+
+Download required NLTK resources:
+
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('wordnet')
+nltk.download('sentiwordnet')
+
+---
+
+## How to Run
+
+1. Clone the repository  
+   git clone https://github.com/your-username/NLP-Sentiment-Analysis.git
+
+2. Open the notebook  
+   jupyter notebook draft-1.ipynb
+
+3. Update dataset path if necessary  
+4. Run all cells  
+
+---
+
+## Future Improvements
+
+- Use pre-trained embeddings (GloVe, FastText)
+- Replace CNN with BiLSTM or Transformer
+- Add attention mechanism
+- Hyperparameter tuning
+- Deploy as a REST API
+
+---
+
+.
