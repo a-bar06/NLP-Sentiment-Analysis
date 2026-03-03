@@ -78,6 +78,25 @@ focal_loss(gamma=2.0, alpha=0.25)
 - Pandas
 
 ---
+## Project Structure
+
+NLP-Sentiment-Analysis/
+│
+├── data/
+│   └── train.csv                  # Dataset file
+│
+├── notebooks/
+│   └── draft-1.ipynb              # Main training & experimentation notebook
+│
+├── src/
+│   ├── preprocessing.py           # Text cleaning and preprocessing functions
+│   ├── sentiment_features.py      # SentiWordNet feature extraction
+│   ├── model.py                   # TextCNN + hybrid model architecture
+│   └── loss.py                    # Focal loss implementation
+│
+├── requirements.txt               # Project dependencies
+├── README.md                      # Project documentation
+└── .gitignore                     # Ignored files and folders
 
 ## Installation
 
